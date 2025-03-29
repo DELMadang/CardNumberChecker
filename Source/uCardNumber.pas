@@ -96,17 +96,21 @@ begin
     Exit;
 
   var LArray := TJSONArray.ParseJSONValue(TFile.ReadAllBytes(DATA_FILE), 0) as TJSONArray;
-  for var i := 0 to LArray.Count-1 do
-  begin
-    var LCardInfo := TCardInfo.Create;
-    LCardInfo.issuer     := LArray.Items[i].GetValue<string>('issuer');
-    LCardInfo.bin        := LArray.Items[i].GetValue<string>('bin');
-    LCardInfo.arg_name   := LArray.Items[i].GetValue<string>('arg_name');
-    LCardInfo.card_gubun := LArray.Items[i].GetValue<string>('card_gubun');
-    LCardInfo.brand      := LArray.Items[i].GetValue<string>('brand');
-    LCardInfo.card_type  := LArray.Items[i].GetValue<string>('card_type');
+  try
+    for var i := 0 to LArray.Count-1 do
+    begin
+      var LCardInfo := TCardInfo.Create;
+      LCardInfo.issuer     := LArray.Items[i].GetValue<string>('issuer');
+      LCardInfo.bin        := LArray.Items[i].GetValue<string>('bin');
+      LCardInfo.arg_name   := LArray.Items[i].GetValue<string>('arg_name');
+      LCardInfo.card_gubun := LArray.Items[i].GetValue<string>('card_gubun');
+      LCardInfo.brand      := LArray.Items[i].GetValue<string>('brand');
+      LCardInfo.card_type  := LArray.Items[i].GetValue<string>('card_type');
 
-    FItems.AddOrSetValue(LCardInfo.bin, LCardInfo);
+      FItems.AddOrSetValue(LCardInfo.bin, LCardInfo);
+    end;
+  finally
+    LArray.Free;
   end;
 end;
 
