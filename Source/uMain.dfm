@@ -32,9 +32,6 @@ object frmMain: TfrmMain
     Top = 42
     Width = 577
     Height = 175
-    Lines.Strings = (
-      '376277645844523'
-      '4658877542038425')
     TabOrder = 1
   end
   object eCardNumber: TEdit
